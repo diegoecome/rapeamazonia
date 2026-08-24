@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canopy-clip: polygon(
+    0% 6%, 4% 2%, 9% 5%, 14% 1%, 20% 4%, 26% 0%, 33% 3%, 40% 0%,
+    47% 4%, 54% 1%, 61% 5%, 68% 2%, 75% 6%, 82% 2%, 89% 5%, 96% 1%, 100% 4%,
+    100% 100%, 0% 100%
+  );
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0B120D;
+  color: #E8DFC8;
+}
+
+::selection {
+  background: #C9922C;
+  color: #0B120D;
+}
+
+/* Divisor orgânico entre seções — silhueta de copa de árvore, não uma linha reta */
+.canopy-divider {
+  clip-path: var(--canopy-clip);
+}
+
+/* Grão sutil para dar profundidade, nunca interferindo na leitura */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/grain.svg');
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Raios de luz dourada — animação lenta e discreta */
+@keyframes driftLight {
+  0% { transform: translateX(-5%) translateY(0); opacity: 0.35; }
+  50% { transform: translateX(3%) translateY(2%); opacity: 0.55; }
+  100% { transform: translateX(-5%) translateY(0); opacity: 0.35; }
+}
+
+.light-ray {
+  animation: driftLight 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .light-ray {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid #D8AE5C;
+  outline-offset: 3px;
+}
